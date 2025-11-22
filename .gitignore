@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# incorrectly placed node_modules content
+/@typescript-eslint
+/B part

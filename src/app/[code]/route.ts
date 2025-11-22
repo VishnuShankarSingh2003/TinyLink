@@ -4,13 +4,14 @@ import { deleteLink, getLinkByCode } from "@/lib/links";
 import { isValidCode } from "@/lib/code";
 
 type Params = {
-  params: Promise<{
+  params: {
     code: string;
-  }>;
+  };
 };
 
 export async function GET(_request: NextRequest, { params }: Params) {
-  const { code } = await params;
+  const { code } = params;
+
   if (!isValidCode(code)) {
     return NextResponse.json({ message: "Invalid code." }, { status: 400 });
   }
@@ -24,7 +25,8 @@ export async function GET(_request: NextRequest, { params }: Params) {
 }
 
 export async function DELETE(_request: NextRequest, { params }: Params) {
-  const { code } = await params;
+  const { code } = params;
+
   if (!isValidCode(code)) {
     return NextResponse.json({ message: "Invalid code." }, { status: 400 });
   }
@@ -38,7 +40,7 @@ export async function DELETE(_request: NextRequest, { params }: Params) {
     }
     return NextResponse.json(
       { message: error instanceof Error ? error.message : "Unable to delete link." },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
